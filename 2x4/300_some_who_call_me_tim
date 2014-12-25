@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+int main( void )
+{
+    int i, j;
+
+    int a[43] = {1635213943, 1718119528, 1918989665, 1769235828, 1663041568,
+        1634271337, 1853030515, 538968096, 1869873273, 1919418479, 543490165,
+        1696596082, 1969291296, 1919484006, 1869742177, 1886584950, 1701838959,
+        1634009205, 1852113010, 6553705, 2097268, 7274597, 6684704, 2097251,
+        6357103, 7209068, 2097263, 7667829, 7209074, 7077888, 6356992, 6553600,
+        6619136, 7208960, 2097152, 7536640, 7798784, 6356992, 7077888, 7077888,
+        7274496, 7798784, 0};
+
+    char b[] = "j~tmpx~yd`oybzgaej{cyn`bbm";
+
+    for (i = 0; (i < (sizeof(a) / sizeof(int))); a[i] >>= 8, i++)
+        fwrite(&a[i], sizeof(char), 1, stdout);
+    puts("");
+
+    for (i = 0; ((i < (sizeof(a) / sizeof(int))) && ((char) a[i-1] != '\n')); i++)
+        fread(&a[i], sizeof(char), 1, stdin);
+
+    for (i = 0, j = 0; i < sizeof(b); b[i++] ^= (char) a[j++])
+    {
+        if (((char) a[j] == '\0') || ((char) a[j] == '\n'))
+            j = 0;
+        if (((char) a[j] > 0x7A) || ((char) a[j] < 0x61))
+            j++;
+    }
+
+    for (i = 0; (i < (sizeof(a) / sizeof(int))); a[i] >>= 8, i++);
+
+    for (i = 0; (i < (sizeof(a) / sizeof(int))); a[i] >>= 8, i++)
+        fwrite(&a[i], sizeof(char), 1, stdout);
+    puts("");
+
+    for (i = 0; ((i < (sizeof(a) / sizeof(int))) && ((char) a[i-1] != '\n')); i++)
+        fread(&a[i], sizeof(char), 1, stdin);
+
+    for (i = 0, j = 0; i < sizeof(b); b[i++] ^= (char) a[j++])
+    {
+        if (((char) a[j] == '\0') || ((char) a[j] == '\n'))
+            j = 0;
+        if (((char) a[j] > 0x7A) || ((char) a[j] < 0x61))
+            j++;
+    }
+
+    b[sizeof(b)-1] = '\0';
+    puts(b);
+    return 0;
+}
